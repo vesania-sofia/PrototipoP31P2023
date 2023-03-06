@@ -6,7 +6,7 @@
 package vista;
 
 
-import controlador.clsSecciones;
+import controlador.clsCarreras;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import java.io.File;
@@ -18,7 +18,7 @@ import javax.swing.JOptionPane;
  *
  * @author visitante
  */
-public class frmMantenimientoSecciones extends javax.swing.JInternalFrame {
+public class frmMantenimientoCarreras extends javax.swing.JInternalFrame {
 
     public void llenadoDeCombos() {
         /*EmpleadoDAO empleadoDAO = new EmpleadoDAO();
@@ -31,23 +31,25 @@ public class frmMantenimientoSecciones extends javax.swing.JInternalFrame {
 
     public void llenadoDeTablas() {
         DefaultTableModel modelo = new DefaultTableModel();
-        modelo.addColumn("Codigo");
+        modelo.addColumn("CODIGO");
         modelo.addColumn("Nombre");
+        modelo.addColumn("Codigo Facultad");
         modelo.addColumn("Estatus");
-        clsSecciones seccion = new clsSecciones();
+        clsCarreras carrera = new clsCarreras();
         //VendedorDAO vendedorDAO = new VendedorDAO();
-        List<clsSecciones> listaSecciones = seccion.getListadoSecciones();
-        tablaSecciones.setModel(modelo);
+        List<clsCarreras> listaCarreras = carrera.getListadoCarrera();
+        tablaCarreras.setModel(modelo);
         String[] dato = new String[3];
-        for (int i = 0; i < listaSecciones.size(); i++) {
-            dato[0] = listaSecciones.get(i).getCodigoSeccion();
-            dato[1] = listaSecciones.get(i).getNombreSeccion();
-            dato[2] = listaSecciones.get(i).getEstatusSeccion();
+        for (int i = 0; i < listaCarreras.size(); i++) {
+            dato[0] = listaCarreras.get(i).getCodigoCarrera();
+            dato[1] = listaCarreras.get(i).getNombreCarrera();
+            dato[2] = listaCarreras.get(i).getCodFacultadCarrera();
+            dato[3] = listaCarreras.get(i).getEstatusCarrera();
             modelo.addRow(dato);
         }       
     }
 
-    public frmMantenimientoSecciones() {
+    public frmMantenimientoCarreras() {
         initComponents();
         llenadoDeTablas();
         llenadoDeCombos();
@@ -74,14 +76,14 @@ public class frmMantenimientoSecciones extends javax.swing.JInternalFrame {
         txtNombre = new javax.swing.JTextField();
         btnLimpiar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tablaSecciones = new javax.swing.JTable();
+        tablaCarreras = new javax.swing.JTable();
         txtEstatus = new javax.swing.JTextField();
         label5 = new javax.swing.JLabel();
         lb = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         label4 = new javax.swing.JLabel();
         btnActualizar = new javax.swing.JButton();
-        txtCodigo = new javax.swing.JTextField();
+        txtCodFacultad = new javax.swing.JTextField();
         label6 = new javax.swing.JLabel();
 
         lb2.setForeground(new java.awt.Color(204, 204, 204));
@@ -91,7 +93,7 @@ public class frmMantenimientoSecciones extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
-        setTitle("Mantenimiento Secciones");
+        setTitle("Mantenimiento Carreras");
         setVisible(true);
 
         btnEliminar.setText("Eliminar");
@@ -116,7 +118,7 @@ public class frmMantenimientoSecciones extends javax.swing.JInternalFrame {
         });
 
         label1.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        label1.setText("Secciones");
+        label1.setText("Carreras");
 
         btnModificar.setText("Modificar");
         btnModificar.addActionListener(new java.awt.event.ActionListener() {
@@ -139,8 +141,8 @@ public class frmMantenimientoSecciones extends javax.swing.JInternalFrame {
             }
         });
 
-        tablaSecciones.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        tablaSecciones.setModel(new javax.swing.table.DefaultTableModel(
+        tablaCarreras.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        tablaCarreras.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -156,14 +158,14 @@ public class frmMantenimientoSecciones extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tablaSecciones);
+        jScrollPane1.setViewportView(tablaCarreras);
 
         txtEstatus.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         txtEstatus.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
         txtEstatus.setOpaque(false);
 
         label5.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        label5.setText("Estatus");
+        label5.setText("Status");
 
         lb.setForeground(new java.awt.Color(204, 204, 204));
         lb.setText(".");
@@ -176,7 +178,7 @@ public class frmMantenimientoSecciones extends javax.swing.JInternalFrame {
         });
 
         label4.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        label4.setText("Codigo a buscar");
+        label4.setText("ID a buscar");
 
         btnActualizar.setText("Actualizar");
         btnActualizar.addActionListener(new java.awt.event.ActionListener() {
@@ -185,12 +187,12 @@ public class frmMantenimientoSecciones extends javax.swing.JInternalFrame {
             }
         });
 
-        txtCodigo.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        txtCodigo.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
-        txtCodigo.setOpaque(false);
+        txtCodFacultad.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        txtCodFacultad.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
+        txtCodFacultad.setOpaque(false);
 
         label6.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        label6.setText("Codigo");
+        label6.setText("Codigo facultad");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -221,31 +223,36 @@ public class frmMantenimientoSecciones extends javax.swing.JInternalFrame {
                             .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(label6)
-                                .addGap(29, 29, 29)
-                                .addComponent(txtCodigo))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(label3)
                                     .addComponent(label5))
-                                .addGap(29, 29, 29)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtEstatus, javax.swing.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE)
-                                    .addComponent(txtNombre))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lb, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(19, 19, 19)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(302, 302, 302)
+                                        .addComponent(lb, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 38, Short.MAX_VALUE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(txtEstatus, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(90, 90, 90)
+                                        .addComponent(txtNombre))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(label6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtCodFacultad, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnActualizar)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(label1)
-                        .addGap(294, 579, Short.MAX_VALUE))
+                        .addGap(294, 548, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 631, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 589, Short.MAX_VALUE)
                         .addContainerGap())))
         );
         layout.setVerticalGroup(
@@ -259,18 +266,18 @@ public class frmMantenimientoSecciones extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(45, 45, 45)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(label3))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtEstatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(label5)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(label3)
+                                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(lb))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtCodFacultad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(label6))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtEstatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(label5))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnRegistrar)
@@ -296,9 +303,9 @@ public class frmMantenimientoSecciones extends javax.swing.JInternalFrame {
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         // TODO add your handling code here:
         int registrosBorrados=0;
-        clsSecciones seccion = new clsSecciones();
-        seccion.setCodigoSeccion(txtbuscado.getText());
-        registrosBorrados=seccion.setBorrarSecciones(seccion);
+        clsCarreras carrera = new clsCarreras();
+        carrera.setCodigoCarrera(txtbuscado.getText());
+        registrosBorrados=carrera.setBorrarCarrera(carrera);
         JOptionPane.showMessageDialog(null, "Registro Borrado\n", 
                     "Información del Sistema", JOptionPane.INFORMATION_MESSAGE);
         llenadoDeTablas();
@@ -306,11 +313,11 @@ public class frmMantenimientoSecciones extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        clsSecciones seccion = new clsSecciones();
-        seccion.setCodigoSeccion(txtCodigo.getText());
-        seccion.setNombreSeccion(txtNombre.getText());
-        seccion.setEstatusSeccion(txtEstatus.getText());
-        seccion.setIngresarSecciones(seccion);
+        clsCarreras carrera = new clsCarreras();
+        carrera.setNombreCarrera(txtNombre.getText());
+        carrera.setCodFacultadCarrera(txtEstatus.getText());
+        carrera.setEstatusCarrera(txtCodFacultad.getText());
+        carrera.setIngresarCarreran(carrera);
         JOptionPane.showMessageDialog(null, "Registro Ingresado\n", 
                     "Información del Sistema", JOptionPane.INFORMATION_MESSAGE);
         llenadoDeTablas();
@@ -319,23 +326,24 @@ public class frmMantenimientoSecciones extends javax.swing.JInternalFrame {
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
-        clsSecciones seccion = new clsSecciones();
+        clsCarreras carrera = new clsCarreras();
         //usuario.setNombreUsuario(txtbuscado.getText());        
-        seccion.setCodigoSeccion(txtbuscado.getText());        
-        seccion = seccion.getBuscarInformacionSeccionesPorCodigo(seccion);
-        System.out.println("Seccion retornado:" + seccion); 
-        txtCodigo.setText(seccion.getCodigoSeccion());
-        txtNombre.setText(seccion.getNombreSeccion());
-        txtEstatus.setText(seccion.getEstatusSeccion());
+        carrera.setCodigoCarrera(txtbuscado.getText());       
+        carrera = carrera.getBuscarInformacionCarreranPorCodigo(carrera);
+        System.out.println("Usuario retornado:" + carrera);        
+        txtNombre.setText(carrera.getNombreCarrera());
+        txtCodFacultad.setText(carrera.getCodFacultadCarrera());
+        txtEstatus.setText(carrera.getEstatusCarrera());
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
 //        // TODO add your handling code here:
-        clsSecciones seccion = new clsSecciones();
-        seccion.setCodigoSeccion(txtbuscado.getText());
-        seccion.setNombreSeccion(txtNombre.getText());
-        seccion.setEstatusSeccion(txtEstatus.getText());
-        seccion.setModificarSecciones(seccion);
+        clsCarreras carrera = new clsCarreras();
+        carrera.setCodigoCarrera(txtbuscado.getText());
+        carrera.setNombreCarrera(txtNombre.getText());
+        carrera.setNombreCarrera(txtCodFacultad.getText());
+        carrera.setEstatusCarrera(txtEstatus.getText());
+        carrera.setModificarCarrera(carrera);
         JOptionPane.showMessageDialog(null, "Registro Modificado\n", 
                     "Información del Sistema", JOptionPane.INFORMATION_MESSAGE);        
         llenadoDeTablas();
@@ -349,8 +357,8 @@ public class frmMantenimientoSecciones extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnLimpiarActionPerformed
     public void limpiarTextos()
     {
-        txtCodigo.setText("");
         txtNombre.setText("");
+        txtCodFacultad.setText("");
         txtEstatus.setText("");
         txtbuscado.setText("");
     }
@@ -407,8 +415,8 @@ public class frmMantenimientoSecciones extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lb;
     private javax.swing.JLabel lb2;
     private javax.swing.JLabel lbusu;
-    private javax.swing.JTable tablaSecciones;
-    private javax.swing.JTextField txtCodigo;
+    private javax.swing.JTable tablaCarreras;
+    private javax.swing.JTextField txtCodFacultad;
     private javax.swing.JTextField txtEstatus;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtbuscado;

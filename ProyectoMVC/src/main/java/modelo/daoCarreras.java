@@ -5,7 +5,7 @@
  */
 package modelo;
 
-import controlador.clsSecciones;
+import controlador.clsCarreras;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,34 +14,36 @@ import java.util.List;
  *
  * @author visitante
  */
-public class daoSecciones {
+public class daoCarreras {
 
-    private static final String SQL_SELECT = "SELECT codigo_seccion, nombre_seccion, estatus_seccion FROM secciones";
-    private static final String SQL_INSERT = "INSERT INTO secciones(codigo_seccion, nombre_seccion, estatus_seccion) VALUES(?, ?, ?)";
-    private static final String SQL_UPDATE = "UPDATE secciones SET nombre_seccion=?, estatus_seccion=? WHERE codigo_seccion = ?";
-    private static final String SQL_DELETE = "DELETE FROM secciones WHERE codigo_seccion=?";
-    private static final String SQL_SELECT_NOMBRE = "SELECT codigo_seccion, nombre_seccion, estatus_seccion FROM secciones WHERE nombre_seccion = ?";
-    private static final String SQL_SELECT_ID = "SELECT codigo_seccion, nombre_seccion, estatus_seccion FROM secciones WHERE codigo_seccion = ?";    
+    private static final String SQL_SELECT = "SELECT codigo_carrera, nombre_carrera , codigo_facultad, estatus_carrera FROM carreras";
+    private static final String SQL_INSERT = "INSERT INTO carreras(nombre_carrera , codigo_facultad, estatus_carrera) VALUES(?, ?)";
+    private static final String SQL_UPDATE = "UPDATE carreras SET nombre_carrera=?, codigo_facultad=?, estatus_carrera=? WHERE codigo_carrera=? = ?";
+    private static final String SQL_DELETE = "DELETE FROM carreras WHERE codigo_carrera=?";
+    private static final String SQL_SELECT_NOMBRE = "SELECT codigo_carrera, nombre_carrera, codigo_facultad, estatus_carrera FROM carreras WHERE nombre_carrera = ?";
+    private static final String SQL_SELECT_ID = "SELECT codigo_carrera, nombre_carrera, codigo_facultad, estatus_carrera FROM carreras WHERE codigo_carrera = ?";    
 
-    public List<clsSecciones> consultaSecciones() {
+    public List<clsCarreras> consultaCarrera() {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
         
-        List<clsSecciones> secciones = new ArrayList<>();
+        List<clsCarreras> Carreras = new ArrayList<>();
         try {
             conn = Conexion.getConnection();
             stmt = conn.prepareStatement(SQL_SELECT);
             rs = stmt.executeQuery();
             while (rs.next()) {
-                String codigo = rs.getString("codigo_seccion");
-                String nombre = rs.getString("nombre_seccion");
-                String estatus = rs.getString("estatus_seccion");
-                clsSecciones seccion = new clsSecciones();
-                seccion.setCodigoSeccion(codigo);
-                seccion.setNombreSeccion(nombre);
-                seccion.setEstatusSeccion(estatus);
-                secciones.add(seccion);
+                String codigo = rs.getString("codigo_carrera");
+                String nombre = rs.getString("nombre_carrera");
+                String codfacultada = rs.getString("codigo_facultad");
+                String estatus = rs.getString("estatus_carrera");
+                clsCarreras Carrera = new clsCarreras();
+                Carrera.setCodigoCarrera(codigo);
+                Carrera.setNombreCarrera(nombre);
+                Carrera.setCodFacultadCarrera(codfacultada);
+                Carrera.setEstatusCarrera(estatus);
+                Carreras.add(Carrera);
             }
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
@@ -50,19 +52,19 @@ public class daoSecciones {
             Conexion.close(stmt);
             Conexion.close(conn);
         }
-        return secciones;
+        return Carreras;
     }
 
-    public int ingresaSecciones(clsSecciones seccion) {
+    public int ingresaCarrera(clsCarreras carrera) {
         Connection conn = null;
         PreparedStatement stmt = null;
         int rows = 0;
         try {
             conn = Conexion.getConnection();
             stmt = conn.prepareStatement(SQL_INSERT);
-            stmt.setString(1, seccion.getCodigoSeccion());
-            stmt.setString(2, seccion.getNombreSeccion());
-            stmt.setString(3, seccion.getEstatusSeccion());
+            stmt.setString(1, carrera.getNombreCarrera());
+            stmt.setString(2, carrera.getCodFacultadCarrera());
+            stmt.setString(3, carrera.getEstatusCarrera());
 
             System.out.println("ejecutando query:" + SQL_INSERT);
             rows = stmt.executeUpdate();
@@ -77,7 +79,7 @@ public class daoSecciones {
         return rows;
     }
 
-    public int actualizaSecciones(clsSecciones seccion) {
+    public int actualizaCarrera(clsCarreras carrera) {
         Connection conn = null;
         PreparedStatement stmt = null;
         int rows = 0;
@@ -85,9 +87,10 @@ public class daoSecciones {
             conn = Conexion.getConnection();
             System.out.println("ejecutando query: " + SQL_UPDATE);
             stmt = conn.prepareStatement(SQL_UPDATE);
-            stmt.setString(1, seccion.getCodigoSeccion());
-            stmt.setString(2, seccion.getNombreSeccion());
-            stmt.setString(3, seccion.getEstatusSeccion());
+            stmt.setString(1, carrera.getNombreCarrera());
+            stmt.setString(2, carrera.getCodFacultadCarrera());
+            stmt.setString(3, carrera.getEstatusCarrera());
+            stmt.setString(4, carrera.getCodigoCarrera());
 
             rows = stmt.executeUpdate();
             System.out.println("Registros actualizado:" + rows);
@@ -102,7 +105,7 @@ public class daoSecciones {
         return rows;
     }
 
-    public int borrarSecciones(clsSecciones seccion) {
+    public int borrarCarrera(clsCarreras carrera) {
         Connection conn = null;
         PreparedStatement stmt = null;
         int rows = 0;
@@ -111,7 +114,7 @@ public class daoSecciones {
             conn = Conexion.getConnection();
             System.out.println("Ejecutando query:" + SQL_DELETE);
             stmt = conn.prepareStatement(SQL_DELETE);
-            stmt.setString(1, seccion.getCodigoSeccion());
+            stmt.setString(1, carrera.getCodigoCarrera());
             rows = stmt.executeUpdate();
             System.out.println("Registros eliminados:" + rows);
         } catch (SQLException ex) {
@@ -124,27 +127,29 @@ public class daoSecciones {
         return rows;
     }
 
-    public clsSecciones consultaSeccionesPorNombre(clsSecciones seccion) {
+    public clsCarreras consultaCarreraPorNombre(clsCarreras carrera) {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
         try {
             conn = Conexion.getConnection();
-            System.out.println("Ejecutando query:" + SQL_SELECT_NOMBRE + " objeto recibido: " + seccion);
+            System.out.println("Ejecutando query:" + SQL_SELECT_NOMBRE + " objeto recibido: " + carrera);
             stmt = conn.prepareStatement(SQL_SELECT_NOMBRE);
             //stmt.setInt(1, usuario.getIdUsuario());            
-            stmt.setString(1, seccion.getNombreSeccion());
+            stmt.setString(1, carrera.getNombreCarrera());
             rs = stmt.executeQuery();
             while (rs.next()) {
-                String codigo = rs.getString("codigo_seccion");
-                String nombre = rs.getString("nombre_seccion");
-                String estatus = rs.getString("estatus_seccion");
+                String codigo = rs.getString("codigo_carrera");
+                String nombre = rs.getString("nombre_carrera");
+                String codfacultad = rs.getString("codigo_facultad");
+                String estatus = rs.getString("estatus_carrera");
 
                 //usuario = new clsUsuario();
-                seccion.setCodigoSeccion(codigo);
-                seccion.setNombreSeccion(nombre);
-                seccion.setEstatusSeccion(estatus);
-                System.out.println(" registro consultado: " + seccion);                
+                carrera.setCodigoCarrera(codigo);
+                carrera.setNombreCarrera(nombre);
+                carrera.setCodFacultadCarrera(codfacultad);
+                carrera.setEstatusCarrera(estatus);
+                System.out.println(" registro consultado: " + carrera);                
             }
             //System.out.println("Registros buscado:" + persona);
         } catch (SQLException ex) {
@@ -156,29 +161,31 @@ public class daoSecciones {
         }
 
         //return personas;  // Si se utiliza un ArrayList
-        return seccion;
+        return carrera;
     }
-    public clsSecciones consultaSeccionesPorCodigo(clsSecciones seccion) {
+    public clsCarreras consultaCarreraPorCodigo(clsCarreras carrera) {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
         try {
             conn = Conexion.getConnection();
-            System.out.println("Ejecutando query:" + SQL_SELECT_NOMBRE + " objeto recibido: " + seccion);
+            System.out.println("Ejecutando query:" + SQL_SELECT_NOMBRE + " objeto recibido: " + carrera);
             stmt = conn.prepareStatement(SQL_SELECT_ID);
-            stmt.setString(1, seccion.getCodigoSeccion());            
+            stmt.setString(1, carrera.getCodigoCarrera());            
             //stmt.setString(1, usuario.getNombreUsuario());
             rs = stmt.executeQuery();
             while (rs.next()) {
-                String codigo = rs.getString("codigo_seccion");
-                String nombre = rs.getString("nombre_seccion");
-                String estatus = rs.getString("estatus_seccion");
+                String codigo = rs.getString("codigo_carrera");
+                String nombre = rs.getString("nombre_carrera");
+                String codfacultad = rs.getString("codigo_facultad");
+                String estatus = rs.getString("estatus_carrera");
 
                 //usuario = new clsUsuario();
-                seccion.setCodigoSeccion(codigo);
-                seccion.setNombreSeccion(nombre);
-                seccion.setEstatusSeccion(estatus);
-                System.out.println(" registro consultado: " + seccion);                
+                carrera.setCodigoCarrera(codigo);
+                carrera.setNombreCarrera(nombre);
+                carrera.setCodFacultadCarrera(codfacultad);
+                carrera.setEstatusCarrera(estatus);
+                System.out.println(" registro consultado: " + carrera);                
             }
             //System.out.println("Registros buscado:" + persona);
         } catch (SQLException ex) {
@@ -190,6 +197,6 @@ public class daoSecciones {
         }
 
         //return personas;  // Si se utiliza un ArrayList
-        return seccion;
+        return carrera;
     }    
 }
