@@ -17,8 +17,8 @@ import java.util.List;
 public class daoCarreras {
 
     private static final String SQL_SELECT = "SELECT codigo_carrera, nombre_carrera , codigo_facultad, estatus_carrera FROM carreras";
-    private static final String SQL_INSERT = "INSERT INTO carreras(nombre_carrera , codigo_facultad, estatus_carrera) VALUES(?, ?)";
-    private static final String SQL_UPDATE = "UPDATE carreras SET nombre_carrera=?, codigo_facultad=?, estatus_carrera=? WHERE codigo_carrera=? = ?";
+    private static final String SQL_INSERT = "INSERT INTO carreras(nombre_carrera , codigo_facultad, estatus_carrera) VALUES(?, ?, ?)";
+    private static final String SQL_UPDATE = "UPDATE carreras SET nombre_carrera=?, codigo_facultad=?, estatus_carrera=? WHERE codigo_carrera=?";
     private static final String SQL_DELETE = "DELETE FROM carreras WHERE codigo_carrera=?";
     private static final String SQL_SELECT_NOMBRE = "SELECT codigo_carrera, nombre_carrera, codigo_facultad, estatus_carrera FROM carreras WHERE nombre_carrera = ?";
     private static final String SQL_SELECT_ID = "SELECT codigo_carrera, nombre_carrera, codigo_facultad, estatus_carrera FROM carreras WHERE codigo_carrera = ?";    
