@@ -1,0 +1,29 @@
+commit 1a63d81a37b719840808cb45639db80e9b1ccbbf
+Author: sofia Tobar <kgomezt2@miumg.edu.gt>
+Date:   Mon Mar 6 12:45:34 2023 -0600
+
+    arreglando clases
+
+commit fefb55ea556717fb976cebeec8565949aa189c71
+Author: sofia Tobar <kgomezt2@miumg.edu.gt>
+Date:   Mon Mar 6 12:31:46 2023 -0600
+
+    clases agregadas
+
+commit 738448dc6353f64c270fa5278aaa52720fbe737d
+Author: sofia Tobar <kgomezt2@miumg.edu.gt>
+Date:   Mon Mar 6 12:06:41 2023 -0600
+
+    editando base
+
+commit 80c837dc196662daa7e7d7e5f654d4c1d033a7cd
+Author: sofia Tobar <kgomezt2@miumg.edu.gt>
+Date:   Mon Mar 6 12:03:44 2023 -0600
+
+    Agregando base del proyecto
+
+commit 64df87e69d835efd3e9216c746db351e60694555
+Author: vesania-sofia-tobar <97969064+vesania-sofia@users.noreply.github.com>
+Date:   Mon Mar 6 11:59:08 2023 -0600
+
+    Initial commit
