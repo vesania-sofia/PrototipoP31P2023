@@ -227,7 +227,6 @@ public class MdiGeneral extends javax.swing.JFrame {
 
     private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
         // TODO add your handling code here:
-        //Sedes, hecho por Alyson Vannesa Rodríguez Quezada, 9959-21-829
         frmMantenimientoSede ventana = new frmMantenimientoSede();
         jDesktopPane1.add(ventana);
         Dimension desktopSize = jDesktopPane1.getSize();
